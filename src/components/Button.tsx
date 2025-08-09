@@ -5,7 +5,8 @@ type ButtonProps = {
     size?: 'sm' | 'md' | 'lg',
     disabled?: boolean,
     loading?: boolean,
-    className?: string
+    className?: string,
+    type?: 'button' | 'submit' | 'reset'
 }
 const Button: React.FC<ButtonProps> = ({
     children,
@@ -14,7 +15,8 @@ const Button: React.FC<ButtonProps> = ({
     size = 'md',
     disabled = false,
     loading = false,
-    className = ''
+    className = '',
+    type = 'button'
 }) => {
     const baseStyles = 'font-semibold rounded-lg transition-all duration-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2';
 
@@ -37,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
             onClick={onClick}
             disabled={disabled || loading}
+            type={type}
             className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabledStyles} ${className}`}
         >
             {loading && <p className="">Loading...</p>}
