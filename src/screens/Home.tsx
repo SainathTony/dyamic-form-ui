@@ -4,7 +4,6 @@ import GeneratedForm from './GeneratedForm';
 import FormList from './FormList';
 import { getForms, sendFormDescription } from '../services/formService';
 import type { DynamicForm } from '../services/types';
-import Header from './Header';
 
 const Home = () => {
   const [forms, setForms] = useState<DynamicForm[]>([]);
@@ -40,24 +39,21 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900">
-      <Header />
-      <main className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* Left Container - Form Generator and List */}
-        <div className={`p-4 md:p-6 overflow-y-auto ${selectedForm ? 'flex-1 md:w-1/2' : 'w-full max-w-4xl mx-auto'}`}>
-          <div className="p-4 md:p-6 w-full">
-            <FormGenerator onSubmit={handleFormSubmit} isLoading={isFormGenerating} />
-            <FormList forms={forms} loading={formsLoading} onFormSelect={setSelectedForm} selectedForm={selectedForm}/>
-          </div>
+    <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+      {/* Left Container - Form Generator and List */}
+      <div className={`p-4 md:p-6 overflow-y-auto ${selectedForm ? 'flex-1 md:w-1/2' : 'w-full max-w-4xl mx-auto'}`}>
+        <div className="p-4 md:p-6 w-full">
+          <FormGenerator onSubmit={handleFormSubmit} isLoading={isFormGenerating} />
+          <FormList forms={forms} loading={formsLoading} onFormSelect={setSelectedForm} selectedForm={selectedForm} />
         </div>
+      </div>
 
-        {/* Right Container - Generated Form */}
-        {selectedForm && (
-          <div className="flex-1 p-4 md:p-6 overflow-y-auto bg-gray-50 dark:bg-gray-800 md:border-l border-gray-200 dark:border-gray-700">
-            <GeneratedForm form={selectedForm} />
-          </div>
-        )}
-      </main>
+      {/* Right Container - Generated Form */}
+      {selectedForm && (
+        <div className="flex-1 p-4 md:p-6 overflow-y-auto bg-gray-50 dark:bg-gray-800 md:border-l border-gray-200 dark:border-gray-700">
+          <GeneratedForm form={selectedForm} />
+        </div>
+      )}
     </div>
   );
 };

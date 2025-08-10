@@ -2,12 +2,14 @@ import React from 'react';
 import Button from '../components/Button';
 import type { DynamicForm } from '../services/types';
 import { FormFieldRenderer } from '../components/form-fields';
+import { useNavigate } from 'react-router-dom';
 
 interface GeneratedFormProps {
   form: DynamicForm;
 }
 
 const GeneratedForm: React.FC<GeneratedFormProps> = ({ form }) => {
+  const navigate = useNavigate();
   // Initialize form values with empty strings or default values
   const [formValues, setFormValues] = React.useState<Record<string, any>>(
     form.fields.reduce((acc, field) => ({
@@ -41,7 +43,12 @@ const GeneratedForm: React.FC<GeneratedFormProps> = ({ form }) => {
       onSubmit={handleSubmit}
       className="w-full p-8 flex flex-col gap-6"
     >
-      <h2 className="text-2xl font-bold mb-2 text-primary">{form.form_name}</h2>
+      <div className='flex justify-between items-center'>
+        <h2 className="text-2xl font-bold mb-2 text-primary">{form.form_name}</h2>
+        <Button variant="secondary" size="md" onClick={() => navigate(`${form.id}/records`)}>
+          View Records
+        </Button>
+      </div>
       {form.fields.map((field) => {
         const fieldValue = formValues[field.name] ?? '';
         

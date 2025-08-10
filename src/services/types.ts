@@ -9,6 +9,7 @@ type FormField = {
 }
 
 export type DynamicForm = {
+    id: number;
     form_name: string;
     fields: FormField[];
     created_at: Date;
