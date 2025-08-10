@@ -49,9 +49,6 @@ const GeneratedForm: React.FC<GeneratedFormProps> = ({ form, onSubmit }) => {
       };
     });
 
-    console.log('Form data to submit:', formData);
-
-    // Call the parent's onSubmit with the formatted data
     onSubmit(form.id, formData);
   };
 
@@ -66,7 +63,7 @@ const GeneratedForm: React.FC<GeneratedFormProps> = ({ form, onSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full p-8 flex flex-col gap-6"
+      className="w-full py-8 flex flex-col gap-6"
     >
       <div className='flex justify-between items-center'>
         <h2 className="text-2xl font-bold mb-2 text-primary">{form.form_name}</h2>

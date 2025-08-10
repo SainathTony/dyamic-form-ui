@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast'
 const App = () => {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900">
+      <div className="min-h-screen flex flex-col bg-gray-100">
         <Header />
         <main className="flex-1">
           <Routes>

@@ -29,7 +29,7 @@ const FormList: React.FC<FormListProps> = ({ forms, loading, onFormSelect, selec
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+        <h2 className="text-2xl font-bold text-gray-800">
           Your Generated Forms
         </h2>
       </div>
@@ -38,16 +38,16 @@ const FormList: React.FC<FormListProps> = ({ forms, loading, onFormSelect, selec
         {forms.map((form) => (
           <div
             key={form.form_name}
-            className={`bg-white dark:bg-gray-800 rounded-xl  p-4  transition-shadow cursor-pointer ${selectedForm?.form_name === form.form_name ? 'border-2 border-primary' : ''}`}
+            className={`bg-white rounded-xl p-4 transition-shadow cursor-pointer ${selectedForm?.form_name === form.form_name ? 'border-2 border-primary' : ''}`}
             onClick={() => onFormSelect(form)}
           >
             <div className="flex items-center ">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-semibold text-gray-900">
                   {form.form_name}
                 </h3>
               </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400 ml-4">
+              <span className="text-sm text-gray-500 ml-4">
                 {formatter.format(new Date(form.created_at))}
               </span>
             </div>
