@@ -2,28 +2,30 @@ import React, { useState } from 'react';
 import TextArea from '../components/TextArea';
 import Button from '../components/Button';
 
-interface FormGeneratorProps { }
+interface FormGeneratorProps { 
+    onSubmit: (userInput: string) => void;
+    isLoading: boolean;
+}
 
-const FormGenerator: React.FC<FormGeneratorProps> = () => {
+const FormGenerator: React.FC<FormGeneratorProps> = ({ onSubmit, isLoading }) => {
     const [value, setValue] = useState('');
-
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        onSubmit(value);
     };
 
     return (
-        <div className="px-4 py-8 bg-background-light dark:bg-background-dark">
+        <div className="py-8">
             <form
                 onSubmit={handleSubmit}
-                className="w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col gap-6"
+                className="w-full py-4 flex flex-col gap-6"
             >
-                <h2 className="text-2xl font-bold mb-2 text-primary">Generate form</h2>
                 <TextArea
                     value={value}
                     onChange={setValue}
-                    placeholder={"Enter information about your form. Please specify the fields you want to include in the form.\nE.g. name, designation, email, salary"}
-                    label="Fields"
+                    placeholder={"e.g. Create a Employee Survey application/Form to help me collect the employee data like Employee Name, Employee Id, Employee Gender, Employee Date of Birth..."}
+                    label="Ask what kind of form you want to generate"
                     required
                     className=""
                 />
@@ -31,9 +33,9 @@ const FormGenerator: React.FC<FormGeneratorProps> = () => {
                     type="submit"
                     variant="primary"
                     size="md"
-                    disabled={value.trim().length === 0}
+                    disabled={value.trim().length === 0 || isLoading}
                 >
-                    Generate Form
+                    {isLoading ? 'Generating...' : 'Generate Form'}
                 </Button>
             </form>
         </div>

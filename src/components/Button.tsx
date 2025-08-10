@@ -1,6 +1,6 @@
 type ButtonProps = {
     children: React.ReactNode,
-    onClick?: () => void,
+    onClick?: (e: React.MouseEvent) => void,
     variant?: 'primary' | 'secondary' | 'success' | 'danger',
     size?: 'sm' | 'md' | 'lg',
     disabled?: boolean,
