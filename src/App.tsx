@@ -3,6 +3,7 @@ import Home from './screens/Home'
 import RecordsView from './screens/RecordsView'
 import Header from './screens/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           </Routes>
         </main>
       </div>
+      <Toaster position="top-center" />
     </Router>
   )
 }

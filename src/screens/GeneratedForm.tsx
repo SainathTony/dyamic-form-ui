@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface GeneratedFormProps {
   form: DynamicForm;
+  onSubmit: (formId: number, formData: { id: number; value: string }[]) => void;
 }
 
-const GeneratedForm: React.FC<GeneratedFormProps> = ({ form }) => {
+const GeneratedForm: React.FC<GeneratedFormProps> = ({ form, onSubmit }) => {
   const navigate = useNavigate();
   // Initialize form values with empty strings or default values
   const [formValues, setFormValues] = React.useState<Record<string, any>>(
@@ -27,7 +28,31 @@ const GeneratedForm: React.FC<GeneratedFormProps> = ({ form }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Generated form values:', formValues);
+
+    // Create an array of { id, value } objects
+    const formData = form.fields.map(field => {
+      const fieldValue = formValues[field.name];
+      
+      // Convert the value to string, handling different value types
+      let value = '';
+      if (fieldValue !== undefined && fieldValue !== null) {
+        if (field.type === 'checkbox') {
+          value = fieldValue ? 'true' : 'false';
+        } else {
+          value = String(fieldValue);
+        }
+      }
+      
+      return {
+        id: field.id,
+        value: value
+      };
+    });
+
+    console.log('Form data to submit:', formData);
+
+    // Call the parent's onSubmit with the formatted data
+    onSubmit(form.id, formData);
   };
 
   if (!form.fields.length) {
@@ -51,7 +76,7 @@ const GeneratedForm: React.FC<GeneratedFormProps> = ({ form }) => {
       </div>
       {form.fields.map((field) => {
         const fieldValue = formValues[field.name] ?? '';
-        
+
         return (
           <FormFieldRenderer
             key={field.name}
